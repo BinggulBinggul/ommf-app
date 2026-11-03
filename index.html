@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>2026 OMMF - 한마음 커뮤니티</title>
+  <title>OMMF</title>
   <!-- Pretendard 웹폰트 -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
   <!-- Tailwind CSS -->
@@ -20,16 +20,16 @@
     .capsule-shadow { box-shadow: 0 12px 32px -8px rgba(255, 42, 42, 0.25), 0 4px 16px -4px rgba(0, 0, 0, 0.12); }
     .card-ui { border-radius: 26px; transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1); }
     .roulette-wheel { transition: transform 4.2s cubic-bezier(0.15, 0.85, 0.15, 1); }
-    @keyframes pulse-soft { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+    @keyframes pulse-soft { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
     .animate-pulse-soft { animation: pulse-soft 2.4s infinite ease-in-out; }
   </style>
 </head>
 <body class="bg-[#F4F5F8] text-[#191F28] dark:bg-[#101216] dark:text-[#F2F4F8] min-h-screen pb-32 selection:bg-red-500 selection:text-white">
 
   <!-- 상단 고정 반응형 헤더 -->
-  <header class="sticky top-0 z-30 backdrop-blur-xl bg-white/80 dark:bg-[#181B22]/80 border-b border-gray-200/70 dark:border-gray-800/80 px-4 py-3">
+  <header class="sticky top-0 z-30 backdrop-blur-xl bg-white/85 dark:bg-[#181B22]/85 border-b border-gray-200/70 dark:border-gray-800/80 px-4 py-3">
     <div class="max-w-4xl mx-auto flex items-center justify-between gap-2">
-      <!-- 로고 영역 -->
+      <!-- 로고 영역 (OMMF 단독 표기) -->
       <div class="flex items-center gap-2.5">
         <div class="w-10 h-10 rounded-2xl bg-red-50 dark:bg-red-950/50 flex items-center justify-center border border-red-200 dark:border-red-800/50">
           <svg viewBox="0 0 100 100" class="w-7 h-7">
@@ -40,10 +40,10 @@
         </div>
         <div>
           <div class="flex items-center gap-1.5">
-            <span class="font-extrabold text-base tracking-tight text-[#FF2A2A]">한마음</span>
-            <span class="font-extrabold text-base tracking-tight">커뮤니티</span>
+            <span class="font-black text-lg tracking-tight text-[#FF2A2A]">OMMF</span>
+            <span class="text-xs font-extrabold text-gray-500 dark:text-gray-400">한마음 커뮤니티</span>
           </div>
-          <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">소통 · 정보 · 공감 | OMMF</p>
+          <p class="text-[11px] text-gray-500 dark:text-gray-400 font-medium">ONE MIND MOBILE FORUM</p>
         </div>
       </div>
 
@@ -58,7 +58,7 @@
     </div>
   </header>
 
-  <!-- 메인 컨테이너 (스마트폰 1단 ~ 태블릿/PC 가변 그리드) -->
+  <!-- 메인 컨테이너 -->
   <main class="max-w-4xl mx-auto px-4 pt-5 space-y-6">
 
     <!-- [탭 1] 행사 메인 안내 화면 -->
@@ -66,15 +66,15 @@
       <!-- 히어로 배너 -->
       <div class="card-ui bg-gradient-to-br from-[#FF2A2A] to-[#D91B1B] text-white p-6 sm:p-8 shadow-lg relative overflow-hidden">
         <div class="relative z-10 space-y-2">
-          <span id="heroBadge" class="inline-block bg-white/20 backdrop-blur-md text-white text-xs font-extrabold px-3 py-1 rounded-full">2026 OMMF</span>
-          <h1 id="heroTitle" class="text-2xl sm:text-3xl font-black tracking-tight">2026 OMMF에 오신 것을 환영합니다!</h1>
+          <span id="heroBadge" class="inline-block bg-white/20 backdrop-blur-md text-white text-xs font-extrabold px-3 py-1 rounded-full">OMMF</span>
+          <h1 id="heroTitle" class="text-2xl sm:text-3xl font-black tracking-tight">OMMF에 오신 것을 환영합니다!</h1>
           <p id="heroSub" class="text-sm sm:text-base text-red-100 font-medium">ONE MIND MOBILE FORUM · 같이 만들어가는 IT 커뮤니티</p>
           <div class="pt-3 flex flex-wrap gap-2 text-xs font-bold">
             <span class="bg-black/20 px-3 py-1.5 rounded-xl flex items-center gap-1.5">
-              <i data-lucide="calendar" class="w-3.5 h-3.5"></i> <span id="infoDate">2026년 7월 18일 (토) 12:00 ~ 16:00</span>
+              <i data-lucide="calendar" class="w-3.5 h-3.5"></i> <span id="infoDate"></span>
             </span>
             <span class="bg-black/20 px-3 py-1.5 rounded-xl flex items-center gap-1.5">
-              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> <span id="infoPlace">서울 용산구 원효로97길 15 2층 서울광역청년센터</span>
+              <i data-lucide="map-pin" class="w-3.5 h-3.5"></i> <span id="infoPlace"></span>
             </span>
           </div>
         </div>
@@ -88,105 +88,100 @@
             <h2 class="text-base font-extrabold flex items-center gap-2">
               <span class="w-2 h-5 rounded-full bg-[#FF2A2A]"></span> 행사 소개
             </h2>
-            <span class="text-xs font-bold text-[#FF2A2A]">#소장기기자랑 #자유토론</span>
+            <span id="infoHashtags" class="text-xs font-bold text-[#FF2A2A]"></span>
           </div>
-          <div class="grid grid-cols-3 gap-2.5 text-center pt-1">
-            <div class="p-3 rounded-2xl bg-red-50/70 dark:bg-red-950/20 border border-red-100 dark:border-red-900/40">
-              <div class="text-2xl mb-1">📱</div>
-              <div class="text-xs font-extrabold">소장기기 자랑</div>
-            </div>
-            <div class="p-3 rounded-2xl bg-red-50/70 dark:bg-red-950/20 border border-red-100 dark:border-red-900/40">
-              <div class="text-2xl mb-1">💬</div>
-              <div class="text-xs font-extrabold">연령무관 자유토론</div>
-            </div>
-            <div class="p-3 rounded-2xl bg-red-50/70 dark:bg-red-950/20 border border-red-100 dark:border-red-900/40">
-              <div class="text-2xl mb-1">🤝</div>
-              <div class="text-xs font-extrabold">IT 친구들 만들기</div>
-            </div>
-          </div>
+          <div id="introGrid" class="grid grid-cols-3 gap-2.5 text-center pt-1"></div>
         </div>
 
         <!-- 행사 안내 수칙 카드 -->
         <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-2.5">
           <h2 class="text-base font-extrabold flex items-center gap-2">
-            <span class="w-2 h-5 rounded-full bg-[#FF2A2A]"></span> 행사 안전 및 이용 안내
+            <span class="w-2 h-5 rounded-full bg-[#FF2A2A]"></span> 행사 안내
           </h2>
-          <ul class="text-xs sm:text-sm space-y-2 text-gray-600 dark:text-gray-300 leading-relaxed">
-            <li><strong class="text-gray-900 dark:text-white">1. 전시물품 주의:</strong> 내부 기자재 및 전시물품은 조심히 다뤄주세요. 파손 시 주최자가 책임지지 않습니다 (개인 책임).</li>
-            <li><strong class="text-gray-900 dark:text-white">2. 정숙 유지:</strong> 회의실이지만 다른 사람도 사용하는 공간이므로 너무 소란스럽지 않게 배려해 주세요.</li>
-            <li><strong class="text-gray-900 dark:text-white">3. 퇴장 시간:</strong> 행사 시간은 16:00까지입니다. 시간 전에 퇴장 부탁드립니다.</li>
-            <li><strong class="text-gray-900 dark:text-white">4. 취식 안내:</strong> 음료 이외에 취식은 불가능합니다.</li>
-          </ul>
+          <ul id="rulesList" class="text-xs sm:text-sm space-y-2 text-gray-600 dark:text-gray-300 leading-relaxed"></ul>
         </div>
       </div>
 
-      <!-- 요청사항: 행사 정보 바로 밑 QR 랜덤박스 버튼 & 출석 명단 조회 버튼 -->
+      <!-- 행사 정보 밑: QR 랜덤박스 버튼 & 사전등록 출석 현황 조회 버튼 -->
       <div class="card-ui bg-white dark:bg-[#181B22] p-5 border-2 border-[#FF2A2A]/20 space-y-3">
         <div class="flex items-center justify-between">
           <div>
             <h3 class="text-base font-extrabold">행사 참여 메뉴</h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400">현장 QR 코드를 스캔해 랜덤 박스를 열거나 출석 현황을 확인하세요.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">인증 후 랜덤 박스를 열거나 사전 등록된 참여자들의 출석 여부를 확인하세요.</p>
           </div>
-          <span class="text-xs font-extrabold px-2.5 py-1 rounded-full bg-red-100 text-[#FF2A2A] dark:bg-red-950 dark:text-red-300">LIVE</span>
+          <span class="text-xs font-extrabold px-2.5 py-1 rounded-full bg-red-100 text-[#FF2A2A] dark:bg-red-950 dark:text-red-300">OMMF</span>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-          <button onclick="switchTab('roulette'); startQrScanner();" class="animate-pulse-soft flex items-center justify-center gap-3 py-4 px-5 rounded-2xl bg-[#FF2A2A] hover:bg-[#E02020] text-white font-extrabold text-sm sm:text-base shadow-md transition">
+          <button onclick="switchTab('roulette')" class="animate-pulse-soft flex items-center justify-center gap-3 py-4 px-5 rounded-2xl bg-[#FF2A2A] hover:bg-[#E02020] text-white font-extrabold text-sm sm:text-base shadow-md transition">
             <i data-lucide="qr-code" class="w-5 h-5"></i>
             <span>QR 찍고 랜덤 박스 열기</span>
           </button>
           <button onclick="openAttendeeModal()" class="flex items-center justify-center gap-3 py-4 px-5 rounded-2xl bg-gray-900 hover:bg-gray-800 dark:bg-gray-800 dark:hover:bg-gray-700 text-white font-extrabold text-sm sm:text-base transition">
             <i data-lucide="users" class="w-5 h-5"></i>
-            <span>이번 회차 출석 명단 보기 (<span id="homeAttendCount">0</span>명)</span>
+            <span>참여자 출석 현황 보기 (<span id="homeAttendCount">0/0</span>)</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- [탭 2] QR 스캔 & 랜덤 룰렛 화면 -->
+    <!-- [탭 2] QR 스캔 & 수동 코드 입력 & 랜덤 룰렛 화면 -->
     <section id="tab-roulette" class="hidden space-y-5">
       <div class="card-ui bg-white dark:bg-[#181B22] p-5 sm:p-6 border border-gray-200/70 dark:border-gray-800 space-y-5">
         <div class="flex flex-wrap items-center justify-between gap-2">
           <div>
             <h2 class="text-lg font-extrabold flex items-center gap-2">
-              <i data-lucide="gift" class="w-5 h-5 text-[#FF2A2A]"></i> OMMF 럭키 랜덤 룰렛
+              <i data-lucide="gift" class="w-5 h-5 text-[#FF2A2A]"></i> OMMF 랜덤 룰렛
             </h2>
-            <p class="text-xs text-gray-500 dark:text-gray-400">행사장 QR 코드를 카메라로 스캔하면 룰렛 잠금이 해제됩니다.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400">현장 QR 코드를 스캔하거나 인증 코드를 수동 입력하면 룰렛이 열립니다.</p>
           </div>
           <span id="qrStatusBadge" class="text-xs font-extrabold px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300">
-            🔒 QR 스캔 대기 중
+            🔒 인증 대기 중
           </span>
         </div>
 
-        <!-- QR 카메라 스캐너 영역 -->
-        <div class="rounded-2xl bg-gray-100 dark:bg-gray-900 p-4 border border-gray-200 dark:border-gray-800 space-y-3">
+        <!-- 1. 카메라 QR 스캔 및 테스트 버튼 영역 -->
+        <div class="rounded-2xl bg-gray-100 dark:bg-gray-900 p-4 border border-gray-200 dark:border-gray-800 space-y-3.5">
           <div id="qr-reader" class="w-full max-w-sm mx-auto rounded-xl overflow-hidden"></div>
           <div class="flex flex-wrap justify-center gap-2">
-            <button onclick="startQrScanner()" class="px-4 py-2.5 rounded-xl bg-[#FF2A2A] text-white text-xs font-extrabold flex items-center gap-1.5">
+            <button onclick="startQrScanner()" class="px-4 py-2.5 rounded-xl bg-[#FF2A2A] text-white text-xs font-extrabold flex items-center gap-1.5 shadow-sm">
               <i data-lucide="camera" class="w-4 h-4"></i> 카메라로 QR 스캔 시작
             </button>
-            <button onclick="unlockRoulette('현장 QR 인증 완료')" class="px-4 py-2.5 rounded-xl bg-gray-200 dark:bg-gray-800 text-xs font-bold">
-              ⚡ 테스트용 QR 스캔 완료 처리
+            <button onclick="unlockRoulette('TEST_MODE', true)" class="px-4 py-2.5 rounded-xl bg-gray-200 dark:bg-gray-800 text-xs font-bold hover:bg-gray-300 dark:hover:bg-gray-700 transition">
+              🧪 테스트용으로 룰렛 열기 (무효 체험)
             </button>
+          </div>
+
+          <!-- 2. QR 인식 실패 대비 수동 코드 입력란 -->
+          <div class="pt-3 border-t border-gray-200 dark:border-gray-800 max-w-md mx-auto">
+            <label class="block text-[11px] font-bold text-gray-500 dark:text-gray-400 mb-1.5 text-center">
+              카메라 인식이 안 되나요? 운영진에게 받은 인증 코드를 직접 입력하세요.
+            </label>
+            <div class="flex gap-2">
+              <input id="manualQrInput" type="text" placeholder="인증 코드 직접 입력" onkeydown="if(event.key==='Enter')verifyManualCode()" class="flex-1 px-3.5 py-2.5 rounded-xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-xs font-bold focus:outline-none focus:ring-2 focus:ring-[#FF2A2A]" />
+              <button onclick="verifyManualCode()" class="px-4 py-2.5 rounded-xl bg-gray-900 dark:bg-white dark:text-gray-900 text-white text-xs font-extrabold shrink-0">
+                코드 인증
+              </button>
+            </div>
           </div>
         </div>
 
         <!-- 룰렛 휠 영역 -->
         <div class="flex flex-col items-center justify-center py-4 space-y-5">
           <div class="relative w-72 h-72 sm:w-80 sm:h-80 flex items-center justify-center">
-            <!-- 상단 화살표 포인터 -->
             <div class="absolute -top-3 z-20 w-0 h-0 border-l-[14px] border-l-transparent border-r-[14px] border-r-transparent border-t-[24px] border-t-[#FF2A2A] drop-shadow-md"></div>
             <canvas id="rouletteCanvas" width="320" height="320" class="roulette-wheel rounded-full shadow-xl border-4 border-white dark:border-gray-700"></canvas>
           </div>
 
           <button id="spinBtn" onclick="spinRoulette()" disabled class="w-full max-w-xs py-4 rounded-2xl bg-gray-300 dark:bg-gray-800 text-gray-500 font-black text-base transition cursor-not-allowed">
-            QR 코드를 먼저 스캔해주세요
+            QR 스캔 또는 코드를 입력해주세요
           </button>
 
-          <div id="winnerResultBox" class="hidden w-full max-w-md p-4 rounded-2xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 text-center space-y-1">
-            <p class="text-xs font-bold text-[#FF2A2A]">🎉 당첨을 축하합니다!</p>
+          <!-- 당첨 결과 표시 공간 (정식 인증 vs 테스트 무효 구분) -->
+          <div id="winnerResultBox" class="hidden w-full max-w-md p-5 rounded-2xl border text-center space-y-1.5">
+            <p id="winnerHeaderBadge" class="text-xs font-extrabold"></p>
             <p id="winnerPrizeText" class="text-xl font-black"></p>
-            <p class="text-[11px] text-gray-500">운영진에게 이 화면을 보여주시면 상품을 드립니다.</p>
+            <p id="winnerSubNotice" class="text-xs font-bold"></p>
           </div>
         </div>
       </div>
@@ -201,7 +196,7 @@
         </div>
         <div>
           <h2 class="text-lg font-extrabold">운영진 관리자 인증</h2>
-          <p class="text-xs text-gray-500 dark:text-gray-400">룰렛 확률·상품 설정 및 출석 관리를 위해 비밀번호를 입력하세요.</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">행사 설명, QR 인증 암호, 룰렛 확률 및 출석 관리를 위해 비밀번호를 입력하세요.</p>
         </div>
         <input id="adminPwInput" type="password" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')verifyAdmin()" class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-center font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#FF2A2A]" />
         <button onclick="verifyAdmin()" class="w-full py-3.5 rounded-xl bg-[#FF2A2A] text-white font-extrabold text-sm">
@@ -209,16 +204,111 @@
         </button>
       </div>
 
-      <!-- 관리자 대시보드 (인증 후 표시) -->
+      <!-- 관리자 대시보드 -->
       <div id="adminContentBox" class="hidden space-y-5">
-        <!-- 1. 룰렛 상품 및 확률 설정 -->
+
+        <!-- 1. QR 스캔/수동 입력용 인증 코드 설정 -->
+        <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-3">
+          <div>
+            <h3 class="text-base font-extrabold">🔑 추첨 인증 코드 (QR / 수동 입력 겸용) 설정</h3>
+            <p class="text-xs text-gray-500">참여자가 스캔할 QR 코드의 텍스트 데이터이면서, 동시에 수동으로 입력할 때 사용하는 암호입니다.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input id="adminQrSecretInput" type="text" placeholder="예: OMMF2026" class="flex-1 px-3.5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs sm:text-sm font-extrabold border border-gray-200 dark:border-gray-700" />
+            <button onclick="saveQrSecret()" class="py-2.5 px-5 rounded-xl bg-[#FF2A2A] text-white text-xs font-extrabold shrink-0">
+              인증 코드 저장
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. 사전 등록 참여자 출석 체크 관리 -->
+        <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-4">
+          <div>
+            <h3 class="text-base font-extrabold">📋 사전 등록 참여자 및 출석 체크 관리</h3>
+            <p class="text-xs text-gray-500">참여자를 미리 등록해 두고 현장에서 [출석완료 / 미출석] 버튼만 눌러 상태를 변경하세요.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <input id="newAttNick" type="text" placeholder="닉네임 (예: 김감기)" class="px-3.5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+            <input id="newAttName" type="text" placeholder="본명 (예: 김도균)" class="px-3.5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+            <button onclick="addAttendee()" class="py-2.5 px-4 rounded-xl bg-gray-900 dark:bg-white dark:text-gray-900 text-white text-xs font-extrabold">+ 참여자 사전 등록 (기본 미출석)</button>
+          </div>
+
+          <div id="adminAttendeeList" class="space-y-2"></div>
+        </div>
+
+        <!-- 3. 행사 설명 (제목, 일시, 장소, 소개 카드, 안내 수칙) 수정 -->
+        <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-4">
+          <div>
+            <h3 class="text-base font-extrabold">📝 현재 회차 행사 정보 · 소개 · 안내 수정</h3>
+            <p class="text-xs text-gray-500">메인 화면에 표시되는 모든 텍스트를 수정할 수 있습니다.</p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="text-[11px] font-bold text-gray-500">회차 선택 이름 (드롭다운 및 배지)</label>
+              <input id="editBadge" type="text" class="w-full mt-1 px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-gray-500">메인 환영 제목</label>
+              <input id="editTitle" type="text" class="w-full mt-1 px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-gray-500">서브 슬로건</label>
+              <input id="editSub" type="text" class="w-full mt-1 px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-gray-500">해시태그</label>
+              <input id="editHashtags" type="text" class="w-full mt-1 px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-gray-500">행사 일시</label>
+              <input id="editDate" type="text" class="w-full mt-1 px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+            </div>
+            <div>
+              <label class="text-[11px] font-bold text-gray-500">행사 장소</label>
+              <input id="editPlace" type="text" class="w-full mt-1 px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+            </div>
+          </div>
+
+          <!-- 행사 소개 3가지 아이콘/텍스트 편집 -->
+          <div class="space-y-2 pt-2 border-t border-gray-100 dark:border-gray-800">
+            <label class="text-[11px] font-bold text-gray-500">행사 소개 3가지 항목 (이모지 / 제목)</label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <div class="flex gap-1.5">
+                <input id="editIntroEmoji0" type="text" class="w-12 px-2 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-center text-xs font-bold" />
+                <input id="editIntroText0" type="text" class="flex-1 px-3 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+              </div>
+              <div class="flex gap-1.5">
+                <input id="editIntroEmoji1" type="text" class="w-12 px-2 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-center text-xs font-bold" />
+                <input id="editIntroText1" type="text" class="flex-1 px-3 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+              </div>
+              <div class="flex gap-1.5">
+                <input id="editIntroEmoji2" type="text" class="w-12 px-2 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-center text-xs font-bold" />
+                <input id="editIntroText2" type="text" class="flex-1 px-3 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+              </div>
+            </div>
+          </div>
+
+          <!-- 행사 안내 수칙 편집 (줄바꿈 구분) -->
+          <div class="space-y-1.5 pt-2 border-t border-gray-100 dark:border-gray-800">
+            <label class="text-[11px] font-bold text-gray-500">행사 안내 사항 (엔터 줄바꿈마다 한 항목씩 표시됩니다)</label>
+            <textarea id="editRules" rows="5" class="w-full p-3 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-medium leading-relaxed"></textarea>
+          </div>
+
+          <button onclick="saveEventDetails()" class="w-full py-3 rounded-xl bg-[#FF2A2A] text-white text-xs sm:text-sm font-extrabold">
+            현재 회차 행사 설명 저장하기
+          </button>
+        </div>
+
+        <!-- 4. 룰렛 상품 및 확률 설정 -->
         <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-4">
           <div class="flex items-center justify-between">
             <div>
               <h3 class="text-base font-extrabold">🎲 랜덤 룰렛 상품 및 확률 설정</h3>
-              <p class="text-xs text-gray-500">상품별 가중치(확률 %)와 남은 수량을 실시간으로 조절합니다.</p>
+              <p class="text-xs text-gray-500">상품별 가중치(확률 %)를 실시간으로 조절합니다.</p>
             </div>
-            <span id="probSumBadge" class="text-xs font-extrabold px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800">합계 100%</span>
+            <span id="probSumBadge" class="text-xs font-extrabold px-2.5 py-1 rounded-full bg-gray-100 dark:bg-gray-800">합계 100</span>
           </div>
 
           <div id="adminPrizeList" class="space-y-2.5"></div>
@@ -230,43 +320,28 @@
           </div>
         </div>
 
-        <!-- 2. 출석 명단 관리 -->
-        <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-4">
-          <div>
-            <h3 class="text-base font-extrabold">📋 참여자 출석 관리</h3>
-            <p class="text-xs text-gray-500">참여자 조회 화면에는 닉네임, 본명, 출석 상태만 공개됩니다.</p>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <input id="newAttNick" type="text" placeholder="닉네임 (예: 김감기)" class="px-3.5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
-            <input id="newAttName" type="text" placeholder="본명 (예: 김도균)" class="px-3.5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
-            <button onclick="addAttendee()" class="py-2.5 px-4 rounded-xl bg-gray-900 dark:bg-white dark:text-gray-900 text-white text-xs font-extrabold">+ 명단 등록 (출석완료)</button>
-          </div>
-
-          <div id="adminAttendeeList" class="space-y-2"></div>
-        </div>
-
-        <!-- 3. 행사 회차 추가 관리 -->
+        <!-- 5. 새 행사 회차 추가 -->
         <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-3">
-          <h3 class="text-base font-extrabold">📅 행사 회차 추가/수정</h3>
+          <h3 class="text-base font-extrabold">📅 새로운 행사 회차 추가</h3>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-            <input id="newSessionTitle" type="text" placeholder="회차 이름 (예: 제2회 2027 OMMF)" class="px-3.5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
+            <input id="newSessionTitle" type="text" placeholder="회차 표시명 (예: 제2회 OMMF)" class="px-3.5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
             <input id="newSessionDate" type="text" placeholder="일시 (예: 2027.07.17 12:00~16:00)" class="px-3.5 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
             <button onclick="addSession()" class="py-2.5 px-4 rounded-xl bg-gray-800 text-white text-xs font-extrabold">+ 새 회차 추가</button>
           </div>
         </div>
+
       </div>
     </section>
 
   </main>
 
-  <!-- 참여자용 출석 명단 조회 모달 (닉네임 & 본명 읽기 전용) -->
+  <!-- 참여자용 사전등록 명단 & 출석 여부 조회 모달 (조회 전용) -->
   <div id="attendeeModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white dark:bg-[#181B22] w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 space-y-4 max-h-[82vh] flex flex-col">
       <div class="flex items-center justify-between">
         <div>
-          <h3 class="text-base font-extrabold">참여자 출석 명단 (조회 전용)</h3>
-          <p class="text-xs text-gray-500">닉네임과 본명만 표시됩니다.</p>
+          <h3 class="text-base font-extrabold">참여자 출석 현황 (조회 전용)</h3>
+          <p class="text-xs text-gray-500">사전 등록된 참여자의 닉네임, 본명, 출석 여부만 표시됩니다.</p>
         </div>
         <button onclick="closeAttendeeModal()" class="p-2 rounded-full bg-gray-100 dark:bg-gray-800">
           <i data-lucide="x" class="w-4 h-4"></i>
@@ -276,7 +351,7 @@
     </div>
   </div>
 
-  <!-- 하단 가변 플로팅 캡슐 메뉴 (모든 화면 대응) -->
+  <!-- 하단 가변 플로팅 캡슐 메뉴 -->
   <nav class="fixed bottom-5 inset-x-0 z-40 flex justify-center px-4 pointer-events-none">
     <div class="pointer-events-auto capsule-shadow bg-white/95 dark:bg-[#1E222B]/95 backdrop-blur-xl border border-gray-200/80 dark:border-gray-700/80 rounded-full p-1.5 flex items-center gap-1 sm:gap-2">
       <button id="nav-home" onclick="switchTab('home')" class="flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-xs sm:text-sm font-extrabold bg-[#FF2A2A] text-white transition">
@@ -295,16 +370,30 @@
   </nav>
 
   <script>
-    const STORAGE_KEY = 'OMMF_APP_STATE_V1';
+    const STORAGE_KEY = 'OMMF_APP_STATE_V2';
     const defaultData = {
-      currentSessionId: '2026-1',
+      currentSessionId: 'ommf-1',
       sessions: [
         {
-          id: '2026-1',
-          badge: '제1회 · 2026 OMMF',
-          title: '2026 OMMF에 오신 것을 환영합니다!',
+          id: 'ommf-1',
+          badge: '제1회 OMMF',
+          title: 'OMMF에 오신 것을 환영합니다!',
+          subtitle: 'ONE MIND MOBILE FORUM · 같이 만들어가는 IT 커뮤니티',
+          hashtags: '#소장기기자랑 #연령무관 #자유토론 #IT친구만들기',
           date: '2026년 7월 18일 (토) 12:00 ~ 16:00',
           place: '서울 용산구 원효로97길 15 2층 서울광역청년센터',
+          qrSecret: 'OMMF2026',
+          intros: [
+            { emoji: '📱', text: '소장기기 자랑' },
+            { emoji: '💬', text: '연령무관 자유토론' },
+            { emoji: '🤝', text: 'IT 친구들 만들기' }
+          ],
+          rules: [
+            '1. 내부 기자재 및 전시물품들은 조심히 다뤄주세요. 파손시 주최자가 책임지지 않습니다. (개인 책임)',
+            '2. 너무 소란스럽게 이야기하지 말아주세요. 회의실이지만 다른 사람도 사용하는 공간이 있으므로 조심해주세요.',
+            '3. 행사 시간은 16:00 까지입니다. 이 전에 퇴장 부탁드립니다.',
+            '4. 음료 이외에 취식은 불가능합니다. 안전한 행사를 위해 협조 부탁드립니다.'
+          ],
           prizes: [
             { id: 1, name: '한마음 스페셜 굿즈 박스', prob: 10, color: '#FF2A2A' },
             { id: 2, name: '초고속 PD 보조배터리', prob: 20, color: '#191F28' },
@@ -313,7 +402,7 @@
           ],
           attendees: [
             { id: 101, nickname: '김감기', realname: '김도균', present: true },
-            { id: 102, nickname: '벨벳수집가', realname: '이서준', present: true },
+            { id: 102, nickname: '벨벳수집가', realname: '이서준', present: false },
             { id: 103, nickname: '블랙베리장인', realname: '박지훈', present: true }
           ]
         }
@@ -322,6 +411,7 @@
 
     let state = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultData;
     let qrUnlocked = false;
+    let isTestSpin = false;
     let html5QrScanner = null;
     let currentRotation = 0;
 
@@ -337,6 +427,7 @@
     function changeSession(id) {
       state.currentSessionId = id;
       saveState();
+      populateAdminFields();
     }
 
     function switchTab(tab) {
@@ -350,6 +441,7 @@
         }
       });
       if (tab === 'roulette') drawRouletteWheel();
+      if (tab === 'admin') populateAdminFields();
     }
 
     function toggleTheme() {
@@ -364,9 +456,8 @@
       document.getElementById('attendeeModal').classList.add('hidden');
     }
 
-    // QR 스캐너 실행
+    // 카메라 QR 스캐너 실행 (관리자가 설정한 인증 코드와 일치하는지 검증)
     function startQrScanner() {
-      const readerEl = document.getElementById('qr-reader');
       if (!window.Html5Qrcode) return;
       if (html5QrScanner) {
         html5QrScanner.stop().catch(() => {});
@@ -376,23 +467,53 @@
         { facingMode: 'environment' },
         { fps: 10, qrbox: { width: 220, height: 220 } },
         (decodedText) => {
-          unlockRoulette(decodedText);
-          html5QrScanner.stop().catch(() => {});
+          const expected = (getCurrentSession().qrSecret || 'OMMF2026').trim();
+          if (decodedText.trim() === expected) {
+            unlockRoulette(decodedText.trim(), false);
+            html5QrScanner.stop().catch(() => {});
+          } else {
+            alert('유효하지 않은 QR 코드입니다. 행사장 공식 QR 코드를 스캔해주세요.');
+          }
         },
         () => {}
       ).catch(() => {
-        alert('카메라 권한을 허용해주시거나 우측의 [테스트용 QR 스캔 완료 처리] 버튼을 눌러주세요.');
+        alert('카메라를 열 수 없습니다. 아래 수동 입력창에 인증 코드를 직접 입력해주세요.');
       });
     }
 
-    function unlockRoulette(codeText) {
+    // 수동 인증 코드 입력 확인
+    function verifyManualCode() {
+      const input = document.getElementById('manualQrInput').value.trim();
+      const expected = (getCurrentSession().qrSecret || 'OMMF2026').trim();
+      if (!input) return alert('인증 코드를 입력해주세요.');
+      if (input === expected) {
+        unlockRoulette(input, false);
+        document.getElementById('manualQrInput').value = '';
+      } else {
+        alert('인증 코드가 일치하지 않습니다. 다시 확인해주세요.');
+      }
+    }
+
+    // 룰렛 잠금 해제 (isTest 여부 구분)
+    function unlockRoulette(codeText, isTest) {
       qrUnlocked = true;
+      isTestSpin = Boolean(isTest);
+      document.getElementById('winnerResultBox').classList.add('hidden');
+
       const badge = document.getElementById('qrStatusBadge');
-      badge.textContent = '✅ QR 인증 완료 (' + codeText.slice(0, 12) + ')';
-      badge.className = 'text-xs font-extrabold px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300';
       const spinBtn = document.getElementById('spinBtn');
+
+      if (isTestSpin) {
+        badge.textContent = '🧪 테스트 모드 (당첨 무효)';
+        badge.className = 'text-xs font-extrabold px-3 py-1.5 rounded-full bg-purple-100 text-purple-800 dark:bg-purple-950 dark:text-purple-300';
+        spinBtn.textContent = '🧪 테스트용 랜덤 박스 돌리기 (무효)';
+      } else {
+        badge.textContent = '✅ 정식 인증 완료';
+        badge.className = 'text-xs font-extrabold px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950 dark:text-emerald-300';
+        spinBtn.textContent = '🎯 지금 랜덤 박스 돌리기!';
+      }
+
       spinBtn.disabled = false;
-      spinBtn.textContent = '🎯 지금 랜덤 박스 돌리기!';
       spinBtn.className = 'w-full max-w-xs py-4 rounded-2xl bg-[#FF2A2A] hover:bg-[#D91B1B] text-white font-black text-base shadow-lg transition cursor-pointer';
     }
 
@@ -456,13 +577,37 @@
       spinBtn.disabled = true;
       spinBtn.textContent = '두구두구... 추첨 중!';
 
+      const wasTest = isTestSpin;
+
       setTimeout(() => {
         const winner = prizes[chosenIndex];
-        document.getElementById('winnerResultBox').classList.remove('hidden');
-        document.getElementById('winnerPrizeText').textContent = winner.name;
-        if (window.confetti) confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
+        const resultBox = document.getElementById('winnerResultBox');
+        const headerBadge = document.getElementById('winnerHeaderBadge');
+        const prizeText = document.getElementById('winnerPrizeText');
+        const subNotice = document.getElementById('winnerSubNotice');
+
+        resultBox.classList.remove('hidden');
+        prizeText.textContent = winner.name;
+
+        if (wasTest) {
+          resultBox.className = 'w-full max-w-md p-5 rounded-2xl bg-gray-100 dark:bg-gray-900 border-2 border-red-500 text-center space-y-1.5';
+          headerBadge.textContent = '⚠️ [테스트용으로 진행되어 무효입니다]';
+          headerBadge.className = 'text-sm font-black text-red-600 dark:text-red-400';
+          subNotice.textContent = '본 결과는 테스트용 시뮬레이션이므로 상품이 지급되지 않습니다.';
+          subNotice.className = 'text-xs font-bold text-red-500';
+        } else {
+          resultBox.className = 'w-full max-w-md p-5 rounded-2xl bg-red-50 dark:bg-red-950/40 border-2 border-red-300 dark:border-red-800 text-center space-y-1.5';
+          headerBadge.textContent = '🎉 정식 인증 당첨을 축하합니다!';
+          headerBadge.className = 'text-xs font-extrabold text-[#FF2A2A]';
+          subNotice.textContent = '운영진에게 이 화면을 보여주시면 상품을 드립니다.';
+          subNotice.className = 'text-xs font-bold text-gray-600 dark:text-gray-300';
+          if (window.confetti) confetti({ particleCount: 90, spread: 70, origin: { y: 0.6 } });
+        }
+
         qrUnlocked = false;
-        spinBtn.textContent = 'QR 코드를 다시 스캔하면 재도전 가능';
+        document.getElementById('qrStatusBadge').textContent = '🔒 인증 대기 중';
+        document.getElementById('qrStatusBadge').className = 'text-xs font-extrabold px-3 py-1.5 rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300';
+        spinBtn.textContent = '다시 추첨하려면 QR 스캔 또는 코드 입력';
         spinBtn.className = 'w-full max-w-xs py-4 rounded-2xl bg-gray-300 dark:bg-gray-800 text-gray-500 font-black text-base transition cursor-not-allowed';
       }, 4300);
     }
@@ -473,10 +618,68 @@
       if (pw === 'adminadmin') {
         document.getElementById('adminLockBox').classList.add('hidden');
         document.getElementById('adminContentBox').classList.remove('hidden');
+        populateAdminFields();
         renderAll();
       } else {
         alert('비밀번호가 일치하지 않습니다.');
       }
+    }
+
+    // 관리자 입력 폼에 현재 회차 정보 채우기
+    function populateAdminFields() {
+      const s = getCurrentSession();
+      document.getElementById('adminQrSecretInput').value = s.qrSecret || 'OMMF2026';
+      document.getElementById('editBadge').value = s.badge || '';
+      document.getElementById('editTitle').value = s.title || '';
+      document.getElementById('editSub').value = s.subtitle || '';
+      document.getElementById('editHashtags').value = s.hashtags || '';
+      document.getElementById('editDate').value = s.date || '';
+      document.getElementById('editPlace').value = s.place || '';
+
+      const intros = s.intros || [
+        { emoji: '📱', text: '소장기기 자랑' },
+        { emoji: '💬', text: '연령무관 자유토론' },
+        { emoji: '🤝', text: 'IT 친구들 만들기' }
+      ];
+      intros.forEach((item, idx) => {
+        if (document.getElementById('editIntroEmoji' + idx)) {
+          document.getElementById('editIntroEmoji' + idx).value = item.emoji;
+          document.getElementById('editIntroText' + idx).value = item.text;
+        }
+      });
+
+      document.getElementById('editRules').value = (s.rules || []).join('\n');
+    }
+
+    function saveQrSecret() {
+      const val = document.getElementById('adminQrSecretInput').value.trim();
+      if (!val) return alert('인증 코드를 입력해주세요.');
+      getCurrentSession().qrSecret = val;
+      saveState();
+      alert('추첨 인증 코드가 [' + val + ']로 변경되었습니다.');
+    }
+
+    function saveEventDetails() {
+      const s = getCurrentSession();
+      s.badge = document.getElementById('editBadge').value.trim() || 'OMMF';
+      s.title = document.getElementById('editTitle').value.trim() || 'OMMF에 오신 것을 환영합니다!';
+      s.subtitle = document.getElementById('editSub').value.trim();
+      s.hashtags = document.getElementById('editHashtags').value.trim();
+      s.date = document.getElementById('editDate').value.trim();
+      s.place = document.getElementById('editPlace').value.trim();
+
+      s.intros = [0, 1, 2].map(idx => ({
+        emoji: document.getElementById('editIntroEmoji' + idx).value.trim() || '✨',
+        text: document.getElementById('editIntroText' + idx).value.trim() || '행사 소개'
+      }));
+
+      s.rules = document.getElementById('editRules').value
+        .split('\n')
+        .map(line => line.trim())
+        .filter(Boolean);
+
+      saveState();
+      alert('행사 소개 및 안내 정보가 저장되었습니다.');
     }
 
     function addPrize() {
@@ -502,11 +705,12 @@
       saveState();
     }
 
+    // 사전 등록 명단 추가 (기본값: 미출석 false)
     function addAttendee() {
       const nickname = document.getElementById('newAttNick').value.trim();
       const realname = document.getElementById('newAttName').value.trim();
       if (!nickname || !realname) return alert('닉네임과 본명을 모두 입력해주세요.');
-      getCurrentSession().attendees.push({ id: Date.now(), nickname, realname, present: true });
+      getCurrentSession().attendees.push({ id: Date.now(), nickname, realname, present: false });
       document.getElementById('newAttNick').value = '';
       document.getElementById('newAttName').value = '';
       saveState();
@@ -526,21 +730,28 @@
     function addSession() {
       const title = document.getElementById('newSessionTitle').value.trim();
       const date = document.getElementById('newSessionDate').value.trim();
-      if (!title || !date) return alert('회차 이름과 일시를 입력해주세요.');
+      if (!title || !date) return alert('회차 표시명과 일시를 입력해주세요.');
+      const current = getCurrentSession();
       const newId = 'session-' + Date.now();
       state.sessions.push({
         id: newId,
         badge: title,
-        title: title + '에 오신 것을 환영합니다!',
+        title: 'OMMF에 오신 것을 환영합니다!',
+        subtitle: current.subtitle,
+        hashtags: current.hashtags,
         date,
-        place: '서울 용산구 원효로97길 15 2층 서울광역청년센터',
-        prizes: [...getCurrentSession().prizes],
+        place: current.place,
+        qrSecret: current.qrSecret || 'OMMF2026',
+        intros: JSON.parse(JSON.stringify(current.intros)),
+        rules: [...current.rules],
+        prizes: JSON.parse(JSON.stringify(current.prizes)),
         attendees: []
       });
       state.currentSessionId = newId;
       document.getElementById('newSessionTitle').value = '';
       document.getElementById('newSessionDate').value = '';
       saveState();
+      populateAdminFields();
     }
 
     function renderAll() {
@@ -550,16 +761,35 @@
         `<option value="${s.id}" ${s.id === session.id ? 'selected' : ''}>${s.badge}</option>`
       ).join('');
 
-      document.getElementById('heroBadge').textContent = session.badge;
-      document.getElementById('heroTitle').textContent = session.title;
-      document.getElementById('infoDate').textContent = session.date;
-      document.getElementById('infoPlace').textContent = session.place;
+      document.getElementById('heroBadge').textContent = session.badge || 'OMMF';
+      document.getElementById('heroTitle').textContent = session.title || 'OMMF에 오신 것을 환영합니다!';
+      document.getElementById('heroSub').textContent = session.subtitle || '';
+      document.getElementById('infoHashtags').textContent = session.hashtags || '';
+      document.getElementById('infoDate').textContent = session.date || '';
+      document.getElementById('infoPlace').textContent = session.place || '';
 
-      const presentList = session.attendees.filter(a => a.present);
-      document.getElementById('homeAttendCount').textContent = presentList.length;
+      // 행사 소개 렌더링
+      const intros = session.intros || [];
+      document.getElementById('introGrid').innerHTML = intros.map(item => `
+        <div class="p-3 rounded-2xl bg-red-50/70 dark:bg-red-950/20 border border-red-100 dark:border-red-900/40">
+          <div class="text-2xl mb-1">${item.emoji}</div>
+          <div class="text-xs font-extrabold">${item.text}</div>
+        </div>
+      `).join('');
 
-      // 참여자용 출석 명단 (닉네임 + 본명만 깔끔하게 노출)
-      document.getElementById('publicAttendeeList').innerHTML = presentList.map((a, idx) => `
+      // 행사 안내 수칙 렌더링
+      const rules = session.rules || [];
+      document.getElementById('rulesList').innerHTML = rules.map(r => `
+        <li class="leading-relaxed font-medium">${r}</li>
+      `).join('');
+
+      // 사전등록 전체 인원 및 출석 인원 집계
+      const totalAtt = session.attendees.length;
+      const presentCount = session.attendees.filter(a => a.present).length;
+      document.getElementById('homeAttendCount').textContent = `${presentCount}/${totalAtt}명 출석`;
+
+      // 참여자용 출석 현황 모달 (사전등록자 전원 노출 + 출석/미출석 상태 배지 표시)
+      document.getElementById('publicAttendeeList').innerHTML = session.attendees.map((a, idx) => `
         <div class="flex items-center justify-between p-3.5 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200/60 dark:border-gray-800">
           <div class="flex items-center gap-3">
             <span class="w-6 h-6 rounded-full bg-[#FF2A2A]/10 text-[#FF2A2A] text-xs font-extrabold flex items-center justify-center">${idx + 1}</span>
@@ -568,9 +798,12 @@
               <span class="text-xs text-gray-500 ml-1.5">(${a.realname})</span>
             </div>
           </div>
-          <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">출석완료</span>
+          ${a.present
+            ? '<span class="text-[11px] font-extrabold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300">출석완료</span>'
+            : '<span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-gray-200 text-gray-600 dark:bg-gray-800 dark:text-gray-400">미출석</span>'
+          }
         </div>
-      `).join('') || '<p class="text-center text-xs text-gray-400 py-6">아직 출석한 인원이 없습니다.</p>';
+      `).join('') || '<p class="text-center text-xs text-gray-400 py-6">등록된 참여자 명단이 없습니다.</p>';
 
       // 관리자 상품 리스트
       const totalProb = session.prizes.reduce((s, p) => s + Number(p.prob), 0);
@@ -592,7 +825,7 @@
         `;
       }).join('');
 
-      // 관리자 출석 리스트
+      // 관리자 출석 체크 리스트
       document.getElementById('adminAttendeeList').innerHTML = session.attendees.map(a => `
         <div class="flex items-center justify-between p-3 rounded-2xl bg-gray-50 dark:bg-gray-900">
           <div>
@@ -600,8 +833,8 @@
             <span class="text-xs text-gray-500 ml-1">(${a.realname})</span>
           </div>
           <div class="flex items-center gap-2">
-            <button onclick="toggleAttendee(${a.id})" class="text-xs font-extrabold px-3 py-1 rounded-xl ${a.present ? 'bg-emerald-500 text-white' : 'bg-gray-200 text-gray-600'}">
-              ${a.present ? '출석됨' : '미출석'}
+            <button onclick="toggleAttendee(${a.id})" class="text-xs font-extrabold px-3.5 py-1.5 rounded-xl transition ${a.present ? 'bg-emerald-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'}">
+              ${a.present ? '✓ 출석완료 (클릭시 미출석)' : '미출석 (클릭시 출석체크)'}
             </button>
             <button onclick="deleteAttendee(${a.id})" class="text-xs text-red-500 font-bold px-2">삭제</button>
           </div>
