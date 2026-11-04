@@ -40,7 +40,7 @@
   <style>
     * { font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif; -webkit-tap-highlight-color: transparent; }
     body { transition: background-color 0.25s ease, color 0.25s ease; }
-    .capsule-shadow { box-shadow: 0 12px 32px -8px rgba(255, 42, 42, 0.25), 0 4px 16px -4px rgba(0, 0, 0, 0.12); }
+    .capsule-shadow { box-shadow: 0 12px 32px -8px rgba(255, 42, 42, 0.22), 0 4px 16px -4px rgba(0, 0, 0, 0.12); }
     .card-ui { border-radius: 26px; transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1); }
     .roulette-wheel { transition: transform 4.2s cubic-bezier(0.15, 0.85, 0.15, 1); }
     @keyframes pulse-soft { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
@@ -80,7 +80,7 @@
   </header>
 
   <!-- 메인 컨테이너 -->
-  <main class="max-w-4xl mx-auto px-4 pt-5 space-y-6">
+  <main class="max-w-4xl mx-auto px-4 pt-5 space-y-5">
 
     <!-- [탭 1] 행사 메인 안내 화면 -->
     <section id="tab-home" class="space-y-5">
@@ -102,6 +102,27 @@
             </span>
           </div>
         </div>
+      </div>
+
+      <!-- 요청사항: 행사 소개 칸 바로 위에 팝업 공지를 언제든 다시 확인할 수 있는 칸 -->
+      <div id="homeNoticeBanner" onclick="openNoticePopupManual()" class="card-ui bg-white dark:bg-[#181B22] p-4 sm:p-5 border border-red-200/80 dark:border-red-900/50 flex items-center justify-between gap-3 cursor-pointer hover:border-[#FF2A2A] transition">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-10 h-10 rounded-2xl bg-red-50 dark:bg-red-950/70 text-[#FF2A2A] flex items-center justify-center shrink-0">
+            <i data-lucide="megaphone" class="w-5 h-5"></i>
+          </div>
+          <div class="min-w-0">
+            <div class="flex items-center gap-1.5">
+              <span class="text-[11px] font-extrabold px-2 py-0.5 rounded-full bg-red-100 text-[#FF2A2A] dark:bg-red-950 dark:text-red-300">공지사항</span>
+              <span class="text-xs font-extrabold text-gray-500 dark:text-gray-400">터치하여 팝업으로 보기</span>
+            </div>
+            <p id="homeNoticePreview" class="text-xs sm:text-sm font-bold text-gray-800 dark:text-gray-200 truncate mt-1">
+              등록된 공지사항이 없습니다.
+            </p>
+          </div>
+        </div>
+        <button type="button" class="px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-gray-800 text-xs font-extrabold shrink-0 hover:bg-[#FF2A2A] hover:text-white transition">
+          공지 열기
+        </button>
       </div>
 
       <!-- 반응형 2단 그리드: 행사 소개 & 행사 안내 -->
@@ -228,7 +249,7 @@
         </button>
       </div>
 
-      <!-- 관리자 대시보드 -->
+      <!-- 관리자 대시보드 (텔레그램 설정 제거됨) -->
       <div id="adminContentBox" class="hidden space-y-5">
 
         <!-- 상단 클라우드 실시간 연결 상태 안내 바 -->
@@ -240,7 +261,7 @@
             </span>
           </div>
           <button onclick="syncFromCloudIfAvailable(true)" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white text-xs font-extrabold">
-            🔄 지금 서버에서 최신 신청서/데이터 불러오기
+            🔄 지금 서버에서 최신 데이터 불러오기
           </button>
         </div>
 
@@ -314,7 +335,7 @@
           <div class="flex items-center justify-between">
             <div>
               <h3 class="text-base font-extrabold">📢 [<span class="adminCurrentSessionLabel text-[#FF2A2A]"></span>] 접속 공지 팝업 설정</h3>
-              <p class="text-xs text-gray-500">공지를 저장하면 참여자가 들어올 때 팝업창이 뜨고, 지우면 팝업이 뜨지 않습니다.</p>
+              <p class="text-xs text-gray-500">공지를 저장하면 참여자 접속 시 팝업창과 메인 화면 상단 공지 칸에 표시됩니다.</p>
             </div>
             <span id="noticeStatusBadge" class="text-xs font-extrabold px-2.5 py-1 rounded-full"></span>
           </div>
@@ -442,11 +463,11 @@
           </div>
         </div>
 
-        <!-- 5. 데이터 영구 백업 / 복원 및 텔레그램 알림 설정 -->
-        <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-4">
+        <!-- 5. 데이터 영구 백업 / 복원 (텔레그램 기능 완전 제거됨) -->
+        <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-3">
           <div>
-            <h3 class="text-base font-extrabold">💾 전체 데이터 파일 백업/복원 & 텔레그램 알림 (선택)</h3>
-            <p class="text-xs text-gray-500">기본적으로 Firebase 서버에 자동 저장되며, 추가로 백업 파일을 내려받거나 텔레그램 알림을 연결할 수 있습니다.</p>
+            <h3 class="text-base font-extrabold">💾 전체 데이터 파일 백업 및 복원</h3>
+            <p class="text-xs text-gray-500">기본적으로 Firebase 서버에 실시간 자동 저장되며, 추가로 백업 파일을 내려받거나 복원할 수 있습니다.</p>
           </div>
           <div class="flex flex-wrap gap-2">
             <button onclick="exportBackupJson()" class="px-4 py-2.5 rounded-xl bg-gray-900 dark:bg-white dark:text-gray-900 text-white text-xs font-extrabold">
@@ -457,20 +478,12 @@
               <input type="file" accept=".json" onchange="importBackupJson(event)" class="hidden" />
             </label>
           </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-gray-100 dark:border-gray-800">
-            <input id="adminTgToken" type="text" placeholder="텔레그램 봇 토큰 (선택사항)" class="px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
-            <input id="adminTgChatId" type="text" placeholder="내 텔레그램 Chat ID (선택사항)" class="px-3.5 py-2 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs font-bold" />
-          </div>
-          <button onclick="saveTelegramSettings()" class="py-2 px-4 rounded-xl bg-gray-800 text-white text-xs font-extrabold">
-            텔레그램 알림 설정 저장
-          </button>
         </div>
 
       </div>
     </section>
 
-    <!-- [탭 4] 참여 신청 화면 (플로팅 메뉴 맨 오른쪽) -->
+    <!-- [탭 4] 참여 신청 화면 -->
     <section id="tab-apply" class="hidden space-y-5">
       <div class="card-ui bg-white dark:bg-[#181B22] p-6 sm:p-7 border border-gray-200/70 dark:border-gray-800 space-y-5">
         <div class="flex items-center justify-between border-b border-gray-100 dark:border-gray-800 pb-4">
@@ -520,7 +533,7 @@
             </div>
           </div>
 
-          <!-- 4. 개인정보 활용 동의 (관리자 설정 문구 연동) -->
+          <!-- 4. 개인정보 활용 동의 -->
           <div class="p-4 rounded-2xl bg-gray-50 dark:bg-gray-900/90 border border-gray-200/80 dark:border-gray-800 space-y-3">
             <div class="flex items-center justify-between">
               <span class="text-xs font-extrabold">개인정보 수집 및 활용 동의</span>
@@ -549,7 +562,7 @@
 
   </main>
 
-  <!-- 초기 접속 공지사항 팝업 모달 -->
+  <!-- 공지사항 팝업 모달 -->
   <div id="noticeModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white dark:bg-[#181B22] w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl border border-gray-200/80 dark:border-gray-800">
       <div class="flex items-center gap-2.5">
@@ -609,14 +622,9 @@
     </div>
   </div>
 
-  <!-- 우측 하단 웹앱 설치 플로팅 아일랜드 버튼 -->
-  <button id="pwaInstallFloatingBtn" onclick="triggerPwaInstall()" class="fixed bottom-20 right-4 z-40 capsule-shadow bg-gray-900 dark:bg-white text-white dark:text-gray-900 px-4 py-2.5 rounded-full text-xs font-extrabold flex items-center gap-1.5 hover:scale-105 transition">
-    <i data-lucide="download" class="w-3.5 h-3.5 text-[#FF2A2A]"></i>
-    <span>앱 설치</span>
-  </button>
-
-  <!-- 하단 가변 플로팅 캡슐 메뉴 (맨 오른쪽에 [참여 신청] 배치) -->
-  <nav class="fixed bottom-5 inset-x-0 z-40 flex justify-center px-3 pointer-events-none">
+  <!-- 하단 가변 플로팅 독 + 옆에 한 칸 따로 떨어져서 뜨는 [앱 설치] 아일랜드 버튼 -->
+  <nav class="fixed bottom-5 inset-x-0 z-40 flex items-center justify-center gap-2 sm:gap-2.5 px-3 pointer-events-none">
+    <!-- 메인 플로팅 캡슐 메뉴 -->
     <div class="pointer-events-auto capsule-shadow bg-white/95 dark:bg-[#1E222B]/95 backdrop-blur-xl border border-gray-200/80 dark:border-gray-700/80 rounded-full p-1.5 flex items-center gap-1 sm:gap-1.5 overflow-x-auto max-w-full">
       <button id="nav-home" onclick="switchTab('home')" class="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold bg-[#FF2A2A] text-white transition shrink-0">
         <i data-lucide="home" class="w-4 h-4"></i>
@@ -630,15 +638,21 @@
         <i data-lucide="shield-check" class="w-4 h-4"></i>
         <span>관리자</span>
       </button>
-      <button id="nav-apply" onclick="switchTab('apply')" class="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition shrink-0">
-        <i data-lucide="user-plus" class="w-4 h-4"></i>
+      <!-- 깔끔하게 강조된 [참여 신청] 버튼 -->
+      <button id="nav-apply" onclick="switchTab('apply')" class="flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold text-[#FF2A2A] bg-red-50 dark:bg-red-950/70 border border-red-200 dark:border-red-800/80 hover:bg-red-100 transition shrink-0">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
         <span>참여 신청</span>
       </button>
     </div>
+
+    <!-- 플로팅 메뉴 옆에 한 칸 따로 떨어져서 뜨는 [앱 설치] 버튼 -->
+    <button id="pwaInstallFloatingBtn" onclick="triggerPwaInstall()" title="OMMF 웹앱 설치" class="pointer-events-auto capsule-shadow bg-white/95 dark:bg-[#1E222B]/95 backdrop-blur-xl border border-gray-200/80 dark:border-gray-700/80 rounded-full p-3 sm:px-4 sm:py-3 text-xs sm:text-sm font-extrabold text-gray-800 dark:text-white flex items-center gap-1.5 hover:border-[#FF2A2A] hover:scale-105 transition shrink-0">
+      <i data-lucide="download" class="w-4 h-4 text-[#FF2A2A]"></i>
+      <span class="hidden sm:inline">앱 설치</span>
+    </button>
   </nav>
 
   <script>
-    // 만들어주신 Firebase 실시간 데이터베이스 주소 고정 내장
     const FIXED_FIREBASE_DB_URL = 'https://ommfapp-default-rtdb.firebaseio.com';
     const MASTER_STORAGE_KEY = 'OMMF_MASTER_DATA';
     const LEGACY_KEYS = ['OMMF_APP_STATE_V3', 'OMMF_APP_STATE_V2', 'OMMF_APP_STATE_V1'];
@@ -653,8 +667,6 @@
       defaultPublicSessionId: 'ommf-1',
       currentSessionId: 'ommf-1',
       privacyPolicyText: defaultPrivacyText,
-      telegramBotToken: '',
-      telegramChatId: '',
       firebaseDbUrl: FIXED_FIREBASE_DB_URL,
       sessions: [
         {
@@ -755,7 +767,6 @@
     let currentRotation = 0;
     let deferredPwaPrompt = null;
 
-    // 로컬 저장 + ommfapp Firebase 실시간 서버에 즉시 저장
     async function saveState() {
       localStorage.setItem(MASTER_STORAGE_KEY, JSON.stringify(state));
       renderAll();
@@ -768,7 +779,6 @@
       } catch (e) {}
     }
 
-    // ommfapp Firebase 실시간 서버에서 데이터 불러오기 (초기 접속 및 실시간 폴링)
     async function syncFromCloudIfAvailable(isManualAlert = false) {
       try {
         const res = await fetch(`${FIXED_FIREBASE_DB_URL}/ommf_state.json`);
@@ -789,13 +799,12 @@
             renderAll();
             if (isManualAlert) alert('서버에서 최신 신청서 및 회차 데이터를 불러왔습니다!');
           } else {
-            // 서버가 비어있는 최초 상태면 현재 로컬 데이터를 서버에 업로드하여 초기화
             await saveState();
             sessionStorage.setItem('OMMF_INITIAL_SYNC_DONE', '1');
           }
         }
       } catch (e) {
-        if (isManualAlert) alert('서버 연결을 확인해주세요. (Firebase 규칙이 true인지 확인 필요)');
+        if (isManualAlert) alert('서버 연결을 확인해주세요.');
       }
     }
 
@@ -822,12 +831,15 @@
       alert(`이제 다른 사용자들이 접속하면 [${target.badge}] 회차가 기본 메인 화면으로 표시됩니다!`);
     }
 
+    // 탭 전환 (참여 신청 버튼은 비활성 상태에서도 깔끔한 강조 스타일 유지)
     function switchTab(tab) {
       ['home', 'roulette', 'admin', 'apply'].forEach(t => {
         document.getElementById('tab-' + t).classList.toggle('hidden', t !== tab);
         const btn = document.getElementById('nav-' + t);
         if (t === tab) {
-          btn.className = 'flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold bg-[#FF2A2A] text-white transition shrink-0';
+          btn.className = 'flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold bg-[#FF2A2A] text-white shadow-sm transition shrink-0';
+        } else if (t === 'apply') {
+          btn.className = 'flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-extrabold text-[#FF2A2A] bg-red-50 dark:bg-red-950/70 border border-red-200 dark:border-red-800/80 hover:bg-red-100 transition shrink-0';
         } else {
           btn.className = 'flex items-center gap-1.5 px-3.5 sm:px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition shrink-0';
         }
@@ -859,7 +871,6 @@
       document.getElementById('applyExhibitDetailBox').classList.toggle('hidden', !checked);
     }
 
-    // 참여 신청 제출 -> 최신 서버 데이터 먼저 가져온 뒤 신청서 추가 & 서버 즉시 반영
     async function submitApplication(e) {
       e.preventDefault();
       const submitBtn = document.getElementById('applySubmitBtn');
@@ -877,7 +888,6 @@
       submitBtn.disabled = true;
       submitBtn.textContent = '전송 중...';
 
-      // 다른 사람이 방금 신청한 데이터가 덮어써지지 않도록 최신 서버 상태 먼저 동기화
       await syncFromCloudIfAvailable(false);
 
       const targetSession = state.sessions.find(s => s.id === sessionId) || getCurrentSession();
@@ -894,7 +904,6 @@
       if (!Array.isArray(targetSession.applications)) targetSession.applications = [];
       targetSession.applications.unshift(newApp);
 
-      // 해당 회차의 사전 등록 출석 명단에도 미출석 상태로 자동 등록
       const exists = targetSession.attendees.some(a => a.nickname === nickname && a.realname === realname);
       if (!exists) {
         targetSession.attendees.push({
@@ -906,18 +915,6 @@
       }
 
       await saveState();
-
-      // 텔레그램 봇이 입력되어 있으면 텔레그램으로도 즉시 알림 발송
-      if (state.telegramBotToken && state.telegramChatId) {
-        const msg = `🔔 [OMMF 신규 참여 신청 도착]\n• 회차: ${targetSession.badge}\n• 닉네임: ${nickname}\n• 본명: ${realname}\n• 기기 전시: ${willExhibit ? '예정 (' + exhibitDetails + ')' : '없음'}\n• 시간: ${newApp.createdAt}`;
-        try {
-          await fetch(`https://api.telegram.org/bot${state.telegramBotToken}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ chat_id: state.telegramChatId, text: msg })
-          });
-        } catch (err) {}
-      }
 
       submitBtn.disabled = false;
       submitBtn.textContent = '참여 신청서 제출하기';
@@ -933,13 +930,6 @@
       state.privacyPolicyText = val;
       await saveState();
       alert('개인정보 활용 동의 설명 글이 서버에 저장되었습니다.');
-    }
-
-    async function saveTelegramSettings() {
-      state.telegramBotToken = document.getElementById('adminTgToken').value.trim();
-      state.telegramChatId = document.getElementById('adminTgChatId').value.trim();
-      await saveState();
-      alert('텔레그램 알림 설정이 저장되었습니다.');
     }
 
     async function deleteApplication(appId) {
@@ -970,6 +960,7 @@
       a.click();
     }
 
+    // 초기 자동 공지 팝업 (공지 내용이 있을 때만 표시)
     function checkAndShowNoticePopup() {
       const s = getCurrentSession();
       const noticeText = (s.notice || '').trim();
@@ -980,6 +971,15 @@
       } else {
         modal.classList.add('hidden');
       }
+    }
+
+    // 행사 소개 위 공지사항 배너 클릭 시 언제든 팝업 열기
+    function openNoticePopupManual() {
+      const s = getCurrentSession();
+      const noticeText = (s.notice || '').trim();
+      const modal = document.getElementById('noticeModal');
+      document.getElementById('noticeModalText').textContent = noticeText || '현재 등록된 공지사항이 없습니다.';
+      modal.classList.remove('hidden');
     }
 
     function closeNoticeModal() {
@@ -1204,8 +1204,6 @@
       }
 
       document.getElementById('adminPrivacyTextInput').value = state.privacyPolicyText || defaultPrivacyText;
-      document.getElementById('adminTgToken').value = state.telegramBotToken || '';
-      document.getElementById('adminTgChatId').value = state.telegramChatId || '';
 
       const hasNotice = Boolean((s.notice || '').trim());
       document.getElementById('adminNoticeInput').value = s.notice || '';
@@ -1403,6 +1401,15 @@
       document.getElementById('infoDate').textContent = session.date || '';
       document.getElementById('infoPlace').textContent = session.place || '';
 
+      // 행사 소개 칸 위 공지사항 확인 배너 업데이트
+      const noticeText = (session.notice || '').trim();
+      const noticePreview = document.getElementById('homeNoticePreview');
+      if (noticePreview) {
+        noticePreview.textContent = noticeText
+          ? noticeText.replace(/\n+/g, ' ')
+          : '현재 등록된 공지사항이 없습니다.';
+      }
+
       const intros = session.intros || [];
       document.getElementById('introGrid').innerHTML = intros.map(item => `
         <div class="p-3 rounded-2xl bg-red-50/70 dark:bg-red-950/20 border border-red-100 dark:border-red-900/40">
@@ -1546,7 +1553,6 @@
       setupSingleFilePWA();
       renderAll();
       syncFromCloudIfAvailable(false);
-      // 8초마다 자동으로 서버에서 신규 신청서 및 출석 현황을 실시간 동기화
       setInterval(() => syncFromCloudIfAvailable(false), 8000);
     });
   </script>
