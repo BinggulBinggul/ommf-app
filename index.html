@@ -4,10 +4,28 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>OMMF</title>
+  <!-- 주소창/탭 로고 (Favicon & Apple Touch Icon 내장) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23ffffff'/%3E%3Cpath d='M50 82 C20 65 10 42 18 25 C25 12 42 14 50 26 C58 14 75 12 82 25 C90 42 80 65 50 82 Z' fill='none' stroke='%23FF2A2A' stroke-width='8' stroke-linejoin='round'/%3E%3Crect x='38' y='30' width='24' height='38' rx='4' transform='rotate(-8 50 49)' fill='none' stroke='%23FF2A2A' stroke-width='5'/%3E%3Cline x1='47' y1='62' x2='53' y2='61' stroke='%23FF2A2A' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23ffffff'/%3E%3Cpath d='M50 82 C20 65 10 42 18 25 C25 12 42 14 50 26 C58 14 75 12 82 25 C90 42 80 65 50 82 Z' fill='none' stroke='%23FF2A2A' stroke-width='8' stroke-linejoin='round'/%3E%3Crect x='38' y='30' width='24' height='38' rx='4' transform='rotate(-8 50 49)' fill='none' stroke='%23FF2A2A' stroke-width='5'/%3E%3Cline x1='47' y1='62' x2='53' y2='61' stroke='%23FF2A2A' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
   <!-- Pretendard 웹폰트 -->
   <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS (시스템 다크모드 class 연동) -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+    // 기기 다크모드 설정 자동 감지 및 실시간 반영
+    function applySystemTheme() {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
+    applySystemTheme();
+    if (window.matchMedia) {
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySystemTheme);
+    }
+  </script>
   <!-- Lucide 아이콘 -->
   <script src="https://unpkg.com/lucide@latest"></script>
   <!-- QR 코드 스캐너 라이브러리 -->
@@ -26,7 +44,7 @@
 </head>
 <body class="bg-[#F4F5F8] text-[#191F28] dark:bg-[#101216] dark:text-[#F2F4F8] min-h-screen pb-32 selection:bg-red-500 selection:text-white">
 
-  <!-- 상단 고정 반응형 헤더 -->
+  <!-- 상단 고정 반응형 헤더 (우측 수동 다크모드 버튼 제거됨) -->
   <header class="sticky top-0 z-30 backdrop-blur-xl bg-white/85 dark:bg-[#181B22]/85 border-b border-gray-200/70 dark:border-gray-800/80 px-4 py-3">
     <div class="max-w-4xl mx-auto flex items-center justify-between gap-2">
       <!-- 로고 영역 (OMMF 단독 표기) -->
@@ -47,13 +65,10 @@
         </div>
       </div>
 
-      <!-- 회차 선택 드롭다운 & 다크모드 버튼 -->
-      <div class="flex items-center gap-2">
+      <!-- 회차 선택 드롭다운 (단독 배치) -->
+      <div class="flex items-center">
         <select id="sessionSelect" onchange="changeSession(this.value)" class="bg-gray-100 dark:bg-gray-800 text-xs sm:text-sm font-bold rounded-2xl px-3.5 py-2 border border-gray-200/80 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-[#FF2A2A]">
         </select>
-        <button onclick="toggleTheme()" class="p-2.5 rounded-2xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition" aria-label="테마 전환">
-          <i data-lucide="moon" class="w-4 h-4"></i>
-        </button>
       </div>
     </div>
   </header>
@@ -196,7 +211,7 @@
         </div>
         <div>
           <h2 class="text-lg font-extrabold">운영진 관리자 인증</h2>
-          <p class="text-xs text-gray-500 dark:text-gray-400">행사 설명, QR 인증 암호, 룰렛 확률 및 출석 관리를 위해 비밀번호를 입력하세요.</p>
+          <p class="text-xs text-gray-500 dark:text-gray-400">공지사항, 행사 설명, QR 인증 암호, 룰렛 확률 및 출석 관리를 위해 비밀번호를 입력하세요.</p>
         </div>
         <input id="adminPwInput" type="password" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')verifyAdmin()" class="w-full px-4 py-3 rounded-xl bg-gray-100 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 text-center font-bold text-sm focus:outline-none focus:ring-2 focus:ring-[#FF2A2A]" />
         <button onclick="verifyAdmin()" class="w-full py-3.5 rounded-xl bg-[#FF2A2A] text-white font-extrabold text-sm">
@@ -206,6 +221,26 @@
 
       <!-- 관리자 대시보드 -->
       <div id="adminContentBox" class="hidden space-y-5">
+
+        <!-- 0. 공지사항 팝업 작성 및 삭제 관리 -->
+        <div class="card-ui bg-white dark:bg-[#181B22] p-5 border-2 border-[#FF2A2A]/30 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-extrabold">📢 참여자 접속 공지 팝업 설정</h3>
+              <p class="text-xs text-gray-500">공지를 저장하면 참여자가 앱에 들어올 때 팝업창이 뜨고, 지우면 팝업이 뜨지 않습니다.</p>
+            </div>
+            <span id="noticeStatusBadge" class="text-xs font-extrabold px-2.5 py-1 rounded-full"></span>
+          </div>
+          <textarea id="adminNoticeInput" rows="3" placeholder="참여자에게 띄울 공지사항을 입력하세요 (비워두거나 지우면 팝업이 뜨지 않습니다)" class="w-full p-3.5 rounded-xl bg-gray-100 dark:bg-gray-900 text-xs sm:text-sm font-medium border border-gray-200 dark:border-gray-700 leading-relaxed focus:outline-none focus:ring-2 focus:ring-[#FF2A2A]"></textarea>
+          <div class="flex flex-wrap gap-2">
+            <button onclick="saveNotice()" class="flex-1 py-2.5 px-4 rounded-xl bg-[#FF2A2A] text-white text-xs font-extrabold">
+              공지 저장 및 팝업 활성화
+            </button>
+            <button onclick="clearNotice()" class="py-2.5 px-4 rounded-xl bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs font-extrabold">
+              공지 지우기 (팝업 끄기)
+            </button>
+          </div>
+        </div>
 
         <!-- 1. QR 스캔/수동 입력용 인증 코드 설정 -->
         <div class="card-ui bg-white dark:bg-[#181B22] p-5 border border-gray-200/70 dark:border-gray-800 space-y-3">
@@ -335,6 +370,25 @@
 
   </main>
 
+  <!-- 초기 접속 공지사항 팝업 모달 (공지가 있을 때만 표시) -->
+  <div id="noticeModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-[#181B22] w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl border border-gray-200/80 dark:border-gray-800">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-2xl bg-red-50 dark:bg-red-950 flex items-center justify-center text-[#FF2A2A] shrink-0">
+          <i data-lucide="bell" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <span class="text-[11px] font-extrabold text-[#FF2A2A]">OMMF 안내</span>
+          <h3 class="text-base font-black">공지사항</h3>
+        </div>
+      </div>
+      <div id="noticeModalText" class="text-xs sm:text-sm text-gray-700 dark:text-gray-200 whitespace-pre-line leading-relaxed bg-gray-50 dark:bg-gray-900/80 p-4 rounded-2xl border border-gray-200/60 dark:border-gray-800 max-h-60 overflow-y-auto"></div>
+      <button onclick="closeNoticeModal()" class="w-full py-3.5 rounded-2xl bg-[#FF2A2A] hover:bg-[#E02020] text-white text-xs sm:text-sm font-extrabold transition">
+        확인했습니다
+      </button>
+    </div>
+  </div>
+
   <!-- 참여자용 사전등록 명단 & 출석 여부 조회 모달 (조회 전용) -->
   <div id="attendeeModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div class="bg-white dark:bg-[#181B22] w-full max-w-md rounded-t-3xl sm:rounded-3xl p-6 space-y-4 max-h-[82vh] flex flex-col">
@@ -370,7 +424,7 @@
   </nav>
 
   <script>
-    const STORAGE_KEY = 'OMMF_APP_STATE_V2';
+    const STORAGE_KEY = 'OMMF_APP_STATE_V3';
     const defaultData = {
       currentSessionId: 'ommf-1',
       sessions: [
@@ -383,6 +437,7 @@
           date: '2026년 7월 18일 (토) 12:00 ~ 16:00',
           place: '서울 용산구 원효로97길 15 2층 서울광역청년센터',
           qrSecret: 'OMMF2026',
+          notice: '',
           intros: [
             { emoji: '📱', text: '소장기기 자랑' },
             { emoji: '💬', text: '연령무관 자유토론' },
@@ -428,6 +483,7 @@
       state.currentSessionId = id;
       saveState();
       populateAdminFields();
+      checkAndShowNoticePopup();
     }
 
     function switchTab(tab) {
@@ -444,8 +500,44 @@
       if (tab === 'admin') populateAdminFields();
     }
 
-    function toggleTheme() {
-      document.documentElement.classList.toggle('dark');
+    // 공지 팝업 확인 및 표시 (공지 텍스트가 존재할 때만 표시)
+    function checkAndShowNoticePopup() {
+      const s = getCurrentSession();
+      const noticeText = (s.notice || '').trim();
+      const modal = document.getElementById('noticeModal');
+      if (noticeText.length > 0) {
+        document.getElementById('noticeModalText').textContent = noticeText;
+        modal.classList.remove('hidden');
+      } else {
+        modal.classList.add('hidden');
+      }
+    }
+
+    function closeNoticeModal() {
+      document.getElementById('noticeModal').classList.add('hidden');
+    }
+
+    function saveNotice() {
+      const s = getCurrentSession();
+      const text = document.getElementById('adminNoticeInput').value.trim();
+      s.notice = text;
+      saveState();
+      populateAdminFields();
+      if (text) {
+        alert('공지사항이 등록되었습니다. 이제 참여자가 접속할 때 공지 팝업이 표시됩니다.');
+      } else {
+        alert('내용이 비어있어 공지 팝업이 비활성화되었습니다.');
+      }
+    }
+
+    function clearNotice() {
+      const s = getCurrentSession();
+      s.notice = '';
+      document.getElementById('adminNoticeInput').value = '';
+      document.getElementById('noticeModal').classList.add('hidden');
+      saveState();
+      populateAdminFields();
+      alert('공지사항이 삭제되어 더 이상 팝업이 뜨지 않습니다.');
     }
 
     function openAttendeeModal() {
@@ -456,7 +548,7 @@
       document.getElementById('attendeeModal').classList.add('hidden');
     }
 
-    // 카메라 QR 스캐너 실행 (관리자가 설정한 인증 코드와 일치하는지 검증)
+    // 카메라 QR 스캐너 실행
     function startQrScanner() {
       if (!window.Html5Qrcode) return;
       if (html5QrScanner) {
@@ -628,6 +720,16 @@
     // 관리자 입력 폼에 현재 회차 정보 채우기
     function populateAdminFields() {
       const s = getCurrentSession();
+      const hasNotice = Boolean((s.notice || '').trim());
+      document.getElementById('adminNoticeInput').value = s.notice || '';
+      const noticeBadge = document.getElementById('noticeStatusBadge');
+      if (noticeBadge) {
+        noticeBadge.textContent = hasNotice ? '팝업 활성 중' : '팝업 꺼짐';
+        noticeBadge.className = hasNotice
+          ? 'text-xs font-extrabold px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300'
+          : 'text-xs font-bold px-2.5 py-1 rounded-full bg-gray-100 text-gray-500 dark:bg-gray-800 dark:text-gray-400';
+      }
+
       document.getElementById('adminQrSecretInput').value = s.qrSecret || 'OMMF2026';
       document.getElementById('editBadge').value = s.badge || '';
       document.getElementById('editTitle').value = s.title || '';
@@ -742,6 +844,7 @@
         date,
         place: current.place,
         qrSecret: current.qrSecret || 'OMMF2026',
+        notice: '',
         intros: JSON.parse(JSON.stringify(current.intros)),
         rules: [...current.rules],
         prizes: JSON.parse(JSON.stringify(current.prizes)),
@@ -788,7 +891,7 @@
       const presentCount = session.attendees.filter(a => a.present).length;
       document.getElementById('homeAttendCount').textContent = `${presentCount}/${totalAtt}명 출석`;
 
-      // 참여자용 출석 현황 모달 (사전등록자 전원 노출 + 출석/미출석 상태 배지 표시)
+      // 참여자용 출석 현황 모달
       document.getElementById('publicAttendeeList').innerHTML = session.attendees.map((a, idx) => `
         <div class="flex items-center justify-between p-3.5 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200/60 dark:border-gray-800">
           <div class="flex items-center gap-3">
@@ -845,7 +948,10 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    window.addEventListener('DOMContentLoaded', renderAll);
+    window.addEventListener('DOMContentLoaded', () => {
+      renderAll();
+      checkAndShowNoticePopup();
+    });
   </script>
 </body>
 </html>
