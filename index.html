@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#FF2A2A" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="OMMF" />
   <title>OMMF</title>
 
@@ -558,19 +558,22 @@
   <div id="pwaGuideModal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white dark:bg-[#181B22] w-full max-w-sm rounded-3xl p-6 space-y-4 shadow-2xl border border-gray-200/80 dark:border-gray-800">
       <div class="flex items-center justify-between">
-        <h3 class="text-base font-black">📲 OMMF 웹앱 설치 안내</h3>
+        <h3 class="text-base font-black">📲 OMMF 독립 앱 설치 안내</h3>
         <button onclick="document.getElementById('pwaGuideModal').classList.add('hidden')" class="p-1.5 rounded-full bg-gray-100 dark:bg-gray-800">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
       <div class="text-xs sm:text-sm text-gray-600 dark:text-gray-300 space-y-2.5 leading-relaxed">
-        <p class="p-3 rounded-2xl bg-gray-50 dark:bg-gray-900">
-          <strong>🍎 아이폰 / 아이패드 (Safari):</strong><br/>
-          하단 바 가운데의 <strong>[공유 아이콘(⬆️)]</strong>을 누른 뒤 메뉴에서 <strong>[홈 화면에 추가]</strong>를 선택하세요.
+        <p class="p-3 rounded-2xl bg-red-50 dark:bg-red-950/40 text-red-700 dark:text-red-300 font-bold">
+          ⚠️ 중요: 이전에 설치한 아이콘이 있다면 먼저 바탕화면에서 삭제한 뒤 진행해주세요!
         </p>
         <p class="p-3 rounded-2xl bg-gray-50 dark:bg-gray-900">
-          <strong>🤖 갤럭시 / 안드로이드 / PC (Chrome):</strong><br/>
-          우측 상단 메뉴(⋮)에서 <strong>[앱 설치]</strong>를 누르면 크롬 배지 없이 정식 앱으로 설치됩니다. (이미 설치한 경우 기존 바로가기를 지우고 다시 설치해 주세요.)
+          <strong>🤖 갤럭시 / 안드로이드 (Chrome·삼성 인터넷):</strong><br/>
+          우측 상단 메뉴(⋮)에서 <strong>[홈 화면에 추가]</strong> → <strong>[설치(Install)]</strong>를 누르면 크롬으로 연결되지 않는 <strong>독립된 별도 앱</strong>으로 설치됩니다.
+        </p>
+        <p class="p-3 rounded-2xl bg-gray-50 dark:bg-gray-900">
+          <strong>🍎 아이폰 / 아이패드 (Safari):</strong><br/>
+          하단 바 가운데의 <strong>[공유 아이콘(⬆️)]</strong> → <strong>[홈 화면에 추가]</strong>를 선택하세요.
         </p>
       </div>
       <button onclick="document.getElementById('pwaGuideModal').classList.add('hidden')" class="w-full py-3 rounded-2xl bg-[#FF2A2A] text-white text-xs font-extrabold">
@@ -1471,8 +1474,52 @@
       if (window.lucide) lucide.createIcons();
     }
 
-    // 정식 WebAPK 설치를 위한 서비스 워커 등록
+    // 캔버스로 실제 PNG(image/png) 로고를 생성해 크롬이 크롬 탭이 아닌 독립 앱(WebAPK)으로 설치하게 만듦
+    function createPngLogoDataUrl(size) {
+      const c = document.createElement('canvas');
+      c.width = size;
+      c.height = size;
+      const ctx = c.getContext('2d');
+      const s = size / 100;
+
+      ctx.fillStyle = '#FFFFFF';
+      ctx.beginPath();
+      ctx.roundRect(0, 0, size, size, 22 * s);
+      ctx.fill();
+
+      ctx.strokeStyle = '#FF2A2A';
+      ctx.lineWidth = 8 * s;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+
+      ctx.beginPath();
+      ctx.moveTo(50 * s, 82 * s);
+      ctx.bezierCurveTo(20 * s, 65 * s, 10 * s, 42 * s, 18 * s, 25 * s);
+      ctx.bezierCurveTo(25 * s, 12 * s, 42 * s, 14 * s, 50 * s, 26 * s);
+      ctx.bezierCurveTo(58 * s, 14 * s, 75 * s, 12 * s, 82 * s, 25 * s);
+      ctx.bezierCurveTo(90 * s, 42 * s, 80 * s, 65 * s, 50 * s, 82 * s);
+      ctx.closePath();
+      ctx.stroke();
+
+      ctx.save();
+      ctx.translate(50 * s, 49 * s);
+      ctx.rotate((-8 * Math.PI) / 180);
+      ctx.lineWidth = 5 * s;
+      ctx.beginPath();
+      ctx.roundRect(-12 * s, -19 * s, 24 * s, 38 * s, 4 * s);
+      ctx.stroke();
+      ctx.restore();
+
+      return c.toDataURL('image/png');
+    }
+
     function setupNativePWA() {
+      try {
+        const icon192 = createPngLogoDataUrl(192);
+        const icon512 = createPngLogoDataUrl(512);
+        document.getElementById('appleTouchIcon').href = icon192;
+      } catch (e) {}
+
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
       }
